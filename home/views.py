@@ -23,10 +23,12 @@ def home(request):
         iag = preprocess(iag)
         iag = np.asarray(iag)
         iag = iag.reshape(1,32,32,1)
-        no = np.argmax(model.predict(iag))
         confidence =model.predict(iag)
-        print(name[no])
-        context = {'name':name[no],'confidence':confidence }
-        
     
-    return render(request,'home.html',context)
+        m='yes'
+        no = np.argmax(model.predict(iag))
+        
+        context = {'name':name[no],'confidence':confidence ,'m':m}
+        return render(request,'home.html',context)
+
+    return render(request,'home.html')
